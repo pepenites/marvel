@@ -1,38 +1,32 @@
-.App {
-  text-align: center;
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.app {
+  padding: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.comic-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.comic-card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+.comic-card img {
+  max-width: 100%;
+  height: auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
 }

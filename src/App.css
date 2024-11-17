@@ -1,55 +1,112 @@
+/* Fondo general */
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
-  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(to bottom, #2c3e50, #34495e);
+  color: #ecf0f1;
 }
 
-.app {
-  padding: 20px;
+/* Botones */
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  border-radius: 25px;
+  transition: all 0.3s ease;
 }
 
+/* Botón "Ver Favoritos" */
+button.ver-favoritos {
+  background-color: #3498db; /* Azul claro */
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+button.ver-favoritos:hover {
+  background-color: #2980b9; /* Azul oscuro */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Botón "Cargar Más" */
+button.cargar-mas {
+  background-color: #2ecc71; /* Verde claro */
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+button.cargar-mas:hover {
+  background-color: #27ae60; /* Verde oscuro */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+button:disabled {
+  background-color: #7f8c8d;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Lista de cómics */
 .comic-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Ajustar el número de columnas */
   gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
+/* Tarjeta de cómics */
 .comic-card {
-  border: 1px solid #ddd;
+  background: #34495e;
   padding: 10px;
-  cursor: pointer;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.comic-card img {
-  max-width: 100%;
-  height: auto;
+.comic-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-button {
-  margin-top: 10px;
-  padding: 5px 10px;
-  cursor: pointer;
+/* Imagen en la tarjeta */
+.comic-thumbnail {
+  width: 100px; /* Tamaño máximo uniforme */
+  height: 150px; /* Relación de aspecto consistente */
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
-
+/* Popup */
 .popup {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 }
 
 .popup-content {
-  background: white;
+  background: #2c3e50;
   padding: 20px;
   border-radius: 10px;
   position: relative;
-  text-align: center;
+  width: 60%;
+  max-width: 600px;
 }
 
 .close-button {
@@ -57,9 +114,71 @@ button {
   top: 10px;
   right: 10px;
   background: red;
-  color: white;
   border: none;
-  padding: 5px 10px;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+}
+
+.close-button:hover {
+  background-color: darkred;
+}
+
+/* Contenido del popup */
+.popup-body {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+/* Imagen dentro del popup */
+.popup-image img {
+  width: 150px; /* Tamaño fijo */
+  height: 200px; /* Tamaño fijo */
+  object-fit: cover;
   border-radius: 5px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Información del popup */
+.popup-info h2 {
+  margin: 0;
+  color: #e74c3c;
+}
+
+/* Botón de favoritos */
+.favorite-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Añadir a Favoritos */
+.favorite-button.add {
+  background-color: #2ecc71; /* Verde claro */
+  color: white;
+}
+
+.favorite-button.add:hover {
+  background-color: #27ae60; /* Verde más oscuro */
+}
+
+/* Quitar de Favoritos */
+.favorite-button.remove {
+  background-color: #e74c3c; /* Rojo claro */
+  color: white;
+}
+
+.favorite-button.remove:hover {
+  background-color: #c0392b; /* Rojo oscuro */
 }

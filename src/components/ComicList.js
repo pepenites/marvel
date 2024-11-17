@@ -24,7 +24,7 @@ const ComicList = ({ onComicSelect, isFavoritesView, favorites }) => {
       const ts = Date.now();
       const hash = md5(ts + privateKey + publicKey).toString();
 
-      const limit = offset === 0 ? 12 : 20; // Mostrar 12 cómics en la preview inicial
+      const limit = offset === 0 ? 16 : 20; // Mostrar 12 cómics en la preview inicial
       const url = `https://gateway.marvel.com/v1/public/comics?orderBy=modified&limit=${limit}&offset=${offset}&ts=${ts}&apikey=${publicKey}&hash=${hash}`;
 
       try {

@@ -1,32 +1,32 @@
 import React, { useState } from 'react';
 import ComicList from './components/ComicList';
-import ComicDetails from './components/ComicDetails';
+import ComicDetailsPopup from './components/ComicDetailsPopup';
 import Favorites from './components/Favorites';
-import './index.css';
+import './App.css';
 
 const App = () => {
-  const [currentView, setCurrentView] = useState('list');
   const [selectedComic, setSelectedComic] = useState(null);
 
-  const selectComic = (comic) => {
-    setSelectedComic(comic);
-    setCurrentView('details');
+  const addToFavorites = (comic) => {
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const updatedFavorites = [...savedFavorites, comic];
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+    alert(`${comic.title} añadido a favoritos`);
   };
 
-  const goBack = () => {
-    setCurrentView('list');
+  const closePopup = () => {
+    setSelectedComic(null);
   };
 
   return (
     <div className="app">
-      {currentView === 'list' ? (
-        <>
-          <ComicList selectComic={selectComic} />
-          <Favorites />
-        </>
-      ) : (
-        <ComicDetails comic={selectedComic} goBack={goBack} />
-      )}
+      <ComicList onComicSelect={setSelectedComic} />
+      <ComicDetailsPopup
+        comic={selectedComic}
+        onClose={closePopup}
+        onAddToFavorites={addToFavorites}
+      />
+      <Favorites />
     </div>
   );
 };

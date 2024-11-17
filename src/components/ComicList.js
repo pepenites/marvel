@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import md5 from 'crypto-js/md5';
 
-const ComicList = ({ selectComic }) => {
+const ComicList = ({ onComicSelect }) => {
   const [comics, setComics] = useState([]);
   const [error, setError] = useState(null);
 
+  const publicKey = 'fbafb2f04b00ecc3409623ca24807135';
+  const privateKey = '23ad6e6fdea4046aea5aaed841f224e6de498098';
+
   useEffect(() => {
     const fetchComics = async () => {
-      // URL con tu clave pública
-      const url = `https://gateway.marvel.com/v1/public/comics?orderBy=modified&limit=10&apikey=fbafb2f04b00ecc3409623ca24807135`;
+      const ts = Date.now();
+      const hash = md5(ts + privateKey + publicKey).toString();
+
+      const url = `https://gateway.marvel.com/v1/public/comics?orderBy=modified&limit=10&ts=${ts}&apikey=${publicKey}&hash=${hash}`;
 
       try {
         const response = await fetch(url);
@@ -32,30 +38,28 @@ const ComicList = ({ selectComic }) => {
     fetchComics();
   }, []);
 
+  if (error) {
+    return <p>Error al cargar los cómics: {error}</p>;
+  }
+
   return (
     <div>
       <h1>Últimos Cómics Modificados</h1>
-      {error ? (
-        <p>Error al cargar los cómics: {error}</p>
-      ) : comics.length > 0 ? (
-        <div className="comic-list">
-          {comics.map((comic) => (
-            <div
-              key={comic.id}
-              onClick={() => selectComic(comic)}
-              className="comic-card"
-            >
-              <img
-                src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
-                alt={comic.title}
-              />
-              <p>{comic.title}</p>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p>Cargando cómics...</p>
-      )}
+      <div className="comic-list">
+        {comics.map((comic) => (
+          <div
+            key={comic.id}
+            onClick={() => onComicSelect(comic)}
+            className="comic-card"
+          >
+            <img
+              src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
+              alt={comic.title}
+            />
+            <p>{comic.title}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
